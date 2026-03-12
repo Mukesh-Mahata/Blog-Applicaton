@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Blog_Application.Models
 {
@@ -17,6 +18,12 @@ namespace Blog_Application.Models
 
         [Required]
         public string Content { get; set; }
+
+        [ForeignKey("Post")]
+        public int PostId { get; set; }
+
+        // Navigation property to the Post
+        public Post Post { get; set; }
 
     }
 }
