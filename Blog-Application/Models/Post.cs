@@ -13,6 +13,9 @@ namespace Blog_Application.Models
         [MaxLength(400, ErrorMessage = "The title cannot exceed 200 characters")]
         public string Title { get; set; }
 
+        [Required]
+        public string Author{ get; set; }
+
 
         [Required(ErrorMessage = "The Content is Required")]
         public string Content { get; set; }
