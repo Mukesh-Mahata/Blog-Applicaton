@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Blog_Application.Models
@@ -23,6 +24,7 @@ namespace Blog_Application.Models
         [Required(ErrorMessage = "The Author is Required")]
         [MaxLength(100, ErrorMessage = "The Name cannot exceed 100 characters")]
 
+        [ValidateNever]
         public string FeatureImagePath { get; set; }
 
         [DataType(DataType.Date)]
@@ -32,8 +34,10 @@ namespace Blog_Application.Models
         public int CategoryId { get; set; }
 
         // Navigation property to the Category
+        [ValidateNever]
         public Category Category { get; set; }
 
+        [ValidateNever]
         public ICollection<Comment> Comments { get; set; }
 
 
