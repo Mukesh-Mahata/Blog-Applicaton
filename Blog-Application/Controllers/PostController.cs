@@ -2,6 +2,7 @@
 using Blog_Application.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Client;
 
 namespace Blog_Application.Controllers
@@ -21,9 +22,21 @@ namespace Blog_Application.Controllers
             _webhostEnvironment = webHostEnvironment;
         }
         [HttpGet]
-        public IActionResult Index()
-        { 
-            return View();
+        public IActionResult Index(int? categoryId)
+        {
+            var postQuery = _context.Posts.Include(p => p.Category).AsQueryable();
+
+           if(categoryId.HasValue)
+           {
+               postQuery = postQuery.Where(p => p.CategoryId == categoryId);
+           }
+
+            var posts = postQuery.ToList();
+
+            ViewBag.Categories = _context.Categories.ToList();
+
+      
+             return View(posts);
         }
 
 
