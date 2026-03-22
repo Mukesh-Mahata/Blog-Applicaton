@@ -73,6 +73,14 @@ namespace Blog_Application.Controllers
                 return RedirectToAction("Index");
 
             }
+            postViewModel.Categories = _context.Categories.Select(c =>
+               new SelectListItem
+               {
+                   Value = c.Id.ToString(),
+                   Text = c.Name
+               }
+           ).ToList();
+
             return View(postViewModel);
         }
         public async Task<String> UploadFiletoFolder(IFormFile file)
