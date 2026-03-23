@@ -39,6 +39,20 @@ namespace Blog_Application.Controllers
              return View(posts);
         }
 
+        [HttpGet]
+        public async Task<IActionResult>Detial(int id){
+            if(id == null) { 
+                return NotFound();
+            }
+            var post = _context.Posts.Include(p => p.Comments)
+                .FirstOrDefault(p => p.Id == id);
+            
+            if(post == null)    
+            {
+                return NotFound();
+            }
+            return View(post);
+        }
 
         [HttpGet]
         public IActionResult Create()
