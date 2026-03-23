@@ -11,7 +11,7 @@ namespace Blog_Application.Models
 
         [Required(ErrorMessage = "The UserName is Required")]
         [MaxLength(100, ErrorMessage = "The title cannot exceed 100 characters")]
-        public int UserName { get; set; }
+        public string UserName { get; set; }
 
         [DataType(DataType.Date)]
         public DateTime CommentDate { get; set; } = DateTime.Now;

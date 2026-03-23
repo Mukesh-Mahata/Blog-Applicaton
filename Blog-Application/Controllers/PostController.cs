@@ -44,7 +44,9 @@ namespace Blog_Application.Controllers
             if(id == null) { 
                 return NotFound();
             }
-            var post = _context.Posts.Include(p => p.Comments)
+            var post = _context.Posts
+                .Include(p => p.Comments)
+                .Include(p=> p.Category)
                 .FirstOrDefault(p => p.Id == id);
             
             if(post == null)    
