@@ -40,7 +40,7 @@ namespace Blog_Application.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult>Detial(int id){
+        public async Task<IActionResult>Detail(int id){
             if(id == null) { 
                 return NotFound();
             }
