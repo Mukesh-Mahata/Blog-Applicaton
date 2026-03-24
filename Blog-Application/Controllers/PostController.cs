@@ -1,4 +1,5 @@
 ﻿using Blog_Application.Data;
+using Blog_Application.Models;
 using Blog_Application.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -98,6 +99,21 @@ namespace Blog_Application.Controllers
            ).ToList();
 
             return View(postViewModel);
+        }
+        
+        public JsonResult AddComment([FromBody]Comment comment)
+        {
+            comment.CommentDate = DateTime.Now;
+            _context.Comments.Add(comment);
+            _context.SaveChanges();
+
+            return Json(new
+            {
+                username = comment.UserName,
+                commentDate = comment.CommentDate.ToString("MMMM dd, yyyy"),
+                content = comment.Content
+            });
+
         }
         public async Task<String> UploadFiletoFolder(IFormFile file)
         {
