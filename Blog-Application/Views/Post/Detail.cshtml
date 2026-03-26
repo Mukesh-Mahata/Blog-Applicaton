@@ -76,8 +76,21 @@
                 var content = $("#Content").val();
                 var postId = @Model.Id;
 
-                console.log(username,content,postId;
-            })
+                // console.log(username,content,postId;
+                $.ajax({
+                        url:'@Url.Action("AddComment", "Post")',
+                        type:'POST',
+                        contentType:'application/json',
+                        data:JSON.stringify({
+                            UserName: userName,
+                            Content: content,
+                            PostId:postId
+                        }),
+                        Success :function(response){
+                            console.log("Success")
+                        }
+                })
+            });
         });
     </script>
 }
